@@ -1,0 +1,6 @@
+{
+  "dataset_folder": "C:/Users/simcor/dev/data/IAM/multiscript_format_debug/",
+  "extension_img": "png",
+  "charset_file": "C:/Users/simcor/dev/data/IAM/multiscript_format/charset.txt",
+  "dir_wandb": "C:/Users/simcor/dev/logs/wandb/"
+}
