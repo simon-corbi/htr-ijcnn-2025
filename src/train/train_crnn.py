@@ -87,8 +87,6 @@ if args.val_data_exist == 1:
     directory_val = os.path.join(dataset_folder, "validation")
 
 ext_img = config_values["extension_img"]
-
-dir_wandb = config_values["dir_wandb"]
 charset_file = config_values["charset_file"]
 
 # Alphabet
@@ -122,6 +120,7 @@ train_db = HTRDataset(directory_train,
                       ext_img=ext_img,
                       apply_noise=1,
                       is_trainset=True)
+print('Nb samples train {}:'.format(len(train_db)))
 
 if args.val_data_exist == 1:
     val_db = HTRDataset(directory_val,
@@ -133,10 +132,6 @@ if args.val_data_exist == 1:
                         args.pad_right,
                         text_read,
                         ext_img=ext_img)
-
-print('Nb samples train {}:'.format(len(train_db)))
-
-if args.val_data_exist == 1:
     print('Nb samples val {}:'.format(len(val_db)))
 
 # Pad img with black = 0
