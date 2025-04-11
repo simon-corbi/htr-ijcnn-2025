@@ -1,10 +1,7 @@
 import torch
 import editdistance
 
-
 from src.data.text.common_token_txt import CTC_PAD
-from src.evaluate.metrics.evaluation_recognition import nb_chars_from_list
-from src.evaluate.metrics.metrics_counter import MetricLossCERWER
 
 
 def groupe_features_per_class(features, gt_seq_frames, index_class_to_filter):
@@ -21,7 +18,6 @@ def groupe_features_per_class(features, gt_seq_frames, index_class_to_filter):
             else:
                 if y.item() == CTC_PAD:
                     print("Error Pad class is used")
-                    # print(one_id)
                 else:
                     if y.item() in dict_feature_per_class:
                         dict_feature_per_class[y.item()].append(f)
@@ -34,7 +30,6 @@ def groupe_features_per_class(features, gt_seq_frames, index_class_to_filter):
 def compute_center_loss_k1(dict_features_per_class, clusters, loss_fct):
     loss_center_all_class = 0
 
-    # nb_frames_used = 0
     nb_class = 0
     for index_class, features in dict_features_per_class.items():
         nb_frames_used_class = 0
@@ -73,15 +68,12 @@ def compute_center_coordinates(data_loader,
 
     dict_feature_per_class_after = {}
 
-    # metrics_main = MetricLossCERWER("Main CRNN")
-
     # Get prediction features
     with torch.no_grad():
         for index_batch, batch_data in enumerate(data_loader):
             x = batch_data["imgs"].to(device)
             x_reduced_len = batch_data["w_reduce"]
 
-            y_index = batch_data["label_ind"].to(device)
             y_gt_txt = batch_data["label_str"]
 
             nb_item_batch = x.shape[0]
@@ -105,13 +97,11 @@ def compute_center_coordinates(data_loader,
                                          top_main_enc]
 
             cers_enc = [editdistance.eval(u, v) for u, v in zip(y_gt_txt, predictions_text_main_enc)]
-            # metrics_main.add_cer(sum(cers_enc), nb_chars_from_list(y_gt_txt))
 
             for i in range(nb_item_batch):
                 if cers_enc[i] == 0:
 
                     # Group features by character
-                    # After BLSTM
                     for f, y in zip(after_blstm[i], top_main_enc[i]):
                         if y in index_class_to_filter:
                             continue
@@ -120,10 +110,7 @@ def compute_center_coordinates(data_loader,
                         else:
                             dict_feature_per_class_after[y] = [f]
 
-    # metrics_main.print_cer()
-
     # Compute means
-    # # After BLSTM
     for key in dict_feature_per_class_after:
         if len(dict_feature_per_class_after[key]) > 0:
             # N, nb features

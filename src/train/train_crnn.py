@@ -185,7 +185,7 @@ path_save_optimizer_best = os.path.join(directory_log, "optimizer_best.torch")
 path_save_optimizer_last = os.path.join(directory_log, "optimizer_last.torch")
 
 lr = args.learning_rate
-# Regularization
+# For center loss
 index_class_to_filter = [char_dict["<BLANK>"]]
 
 if args.read_txt_format == READ_TEXT_FORMAT.RAW:
@@ -269,7 +269,7 @@ for epoch in range(0, args.nb_epochs_max):
             torch.save(model_reco.state_dict(), path_save_model_best)
             torch.save(optimizer.state_dict(), path_save_optimizer_best)
 
-    # Compute cluster if activate
+    # Compute clusters coordinates if activate
     if args.use_regularization == 1:
         if epoch >= args.epoch_start_regularization:
             print("Compute prototype")

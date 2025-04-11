@@ -43,4 +43,5 @@ def centered_img(word_img, tsize, centering=(.5, .5), border_value=None):
     if border_value is None:
         border_value = np.median(word_img)
     word_img = np.pad(word_img[ys:ye, xs:xe], (padh, padw), 'constant', constant_values=border_value)
+
     return word_img

@@ -1,6 +1,6 @@
 # htr-ijcnn-2025
 
-Official code for the paper "" presented in IJCNN 2025.
+Official code for the paper "Applying Center Loss to Neural Networks for Sequence Prediction: A Study for Handwriting Recognition" presented in IJCNN 2025.
 
 Authors: Simon Corbillé, Elisa H. Barney Smith
 
@@ -33,7 +33,7 @@ For GPU: install Pytorch for GPU
 
 ### Images size
 
-for parameters: height_max and width_max
+For parameters: height_max and width_max
 
 |              | Image height | Image width |
 | -------------| -------------| ------------- |
@@ -86,18 +86,19 @@ python src/train/train_crnn.py configuration/config_cpu_demo_iam.json logs
 ## Evaluate
 src/evaluate/evaluate_crnn.py
 
-parameters
-config file like for training
-path model pretrained IAM
+Parameters:
+* config file like for training
+* --path_model path model trained, model trained and IAM in directory "model_pretrained"
 
-link file
+<br/>
+<br/>
+Performance IAM line level model in directory "model_pretrained"
 
-Performance IAM line level
-Validation (976 lines)
+Validation:
 CER: 2.58% WER: 10.80% 
 
-Test(2915 lines)
-Main : CER: 3.85% WER: 14.57% 
+Test:
+CER: 3.85% WER: 14.57% 
 
 ## Reference
 CRNN from "Best Practices for a Handwritten Text Recognition System"
@@ -110,8 +111,8 @@ article: https://arxiv.org/abs/2404.11339
 If you find this work useful, please consider citing:
 ```
 @inproceedings{corbille2025,
-  title={to do},
-  author={to do},
+  title={Applying Center Loss to Neural Networks for Sequence Prediction: A Study for Handwriting Recognition},
+  author={Simon Corbillé, Elisa H. Barney Smith},
   booktitle={to do},
   pages={to do},
   year={2025},

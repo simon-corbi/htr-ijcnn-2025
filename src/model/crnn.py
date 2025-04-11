@@ -1,9 +1,8 @@
 import torch.nn as nn
 import torch.nn.functional as F
-import torch
-
 
 # From: https://github.com/georgeretsi/HTR-best-practices/
+
 
 class BasicBlock(nn.Module):
     expansion = 1

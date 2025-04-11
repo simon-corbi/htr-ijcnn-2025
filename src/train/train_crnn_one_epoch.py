@@ -81,8 +81,7 @@ def train_crnn_reg_one_epoch(training_loader,
         y_enc = batch_data["label_ind"].to(device)
         y_len_enc = batch_data["label_ind_length"]
 
-        y_gt_txt = batch_data["label_str"]
-        # y_gt_txt = [t.strip() for t in y_gt_txt] # Do not remove space padding
+        y_gt_txt = batch_data["label_str"]  # No need  remove space padding
 
         y, _, after_blstm = model(x)
 
@@ -94,16 +93,14 @@ def train_crnn_reg_one_epoch(training_loader,
         # (Nb frames, Batch size, Nb characters) -> (Batch size, Nb frames, Nb characters)
         output_cer = output.transpose(0, 1)
 
-        # old top_main_enc
         top_frames_main_pred = [torch.argmax(lp, dim=1)[:x_reduced_len[j]] for j, lp in enumerate(output_cer)]
 
         top_main_enc_cer = [torch.argmax(lp, dim=1).detach().cpu().numpy()[:x_reduced_len[j]] for j, lp in
                             enumerate(output_cer)]
+        # No need  remove space padding
         predictions_text_main_enc = [text_read.ctc_best_path_one(p, char_list, token_blank) if p is not None else "" for
                                      p in top_main_enc_cer]
 
-        # Do not remove space padding
-        # predictions_text_main_enc = [t.strip() for t in predictions_text_main_enc]  # Remove text padding
         cers = [editdistance.eval(u, v) for u, v in zip(y_gt_txt, predictions_text_main_enc)]
 
         # Get sequence frames labels

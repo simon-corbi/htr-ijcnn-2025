@@ -66,4 +66,5 @@ if __name__ == "__main__":
     source_folder = "C:/Users/simcor/dev/data/Cipher/test_format/task1/"
     save_dir = "C:/Users/simcor/dev/data/Cipher/test_format/Split_train_val/"
 
+    # split data into 2 splits
     split_train_val(source_folder, save_dir, ratio_train=0.8, ext_img="png")
