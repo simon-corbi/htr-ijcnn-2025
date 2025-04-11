@@ -1,0 +1,5 @@
+{
+  "dataset_folder": "../../data/IAM/demo/",
+  "extension_img": "png",
+  "charset_file": "../../charset/charset_iam.txt"
+}

@@ -7,27 +7,39 @@ Authors: Simon Corbillé, Elisa H. Barney Smith
 Machine learning team from Luleå University of Technology
 
 ## Installation
-Code test with Python 3.11
-
-albumentations 1.4.15
-albucore 0.016
+Code test with:
+* Python 3.11
+* albumentations 1.4.15
+* albucore 0.016
 
 ```
 pip install -r requirements.txt
 ```
 
-For GPU used install Pytorch for GPU
+For GPU: install Pytorch for GPU
 
 ## Data
 ### Format dataset
 
-### Hyperparameter
+|              | Download link | Python file format |
+| -------------| -------------| ------------- |
+| IAM          | [Link](https://fki.tic.heia-fr.ch/databases/iam-handwriting-database) | src/data/format/format_iam.py  |
+| Cipher T1    | [Link](https://rrc.cvc.uab.es/?ch=27&com=downloads) 		  | src/data/format/format_ciphers.py  |
+| Cipher T2A   | [Link](https://rrc.cvc.uab.es/?ch=27&com=downloads)  		  | src/data/format/format_ciphers.py  |
+| Cipher T2B   | [Link](https://rrc.cvc.uab.es/?ch=27&com=downloads)  		  | src/data/format/format_ciphers.py  |
+| Cipher T3A   | [Link](https://rrc.cvc.uab.es/?ch=27&com=downloads) 		  | src/data/format/format_ciphers.py  |
+| Cipher T3B   | [Link](https://rrc.cvc.uab.es/?ch=27&com=downloads) 		  | src/data/format/format_ciphers.py  |
+| NorHand v1   | [Link](https://zenodo.org/records/6542056) 		  | Already formatted  |
+
+### Images size
+
+for parameters: height_max and width_max
 
 |              | Image height | Image width |
 | -------------| -------------| ------------- |
 | IAM          | 128          | 1700  |
 | Cipher T1    | 120 		  | 1900  |
-| Cipher T2A   | 96  		  | 768  |
+| Cipher T2A   | 96  		  | 768   |
 | Cipher T2B   | 190  		  | 2100  |
 | Cipher T3A   | 84 		  | 1120  |
 | Cipher T3B   | 190 		  | 2256  |
@@ -39,26 +51,36 @@ cf. directory configuration
 
 ### Text format
 
-IAM, Norhand
+IAM, Norhand: text
 
-Cipher DB
-class labels are separated by space character
+	--read_txt_format "RAW" 
+	--filter_txt "NO" 
+	--compute_wer 1 
+	--use_wer_formula_for_cer 0 
+	--space_value "RAW" 
+	
+Cipher DBs: class labels are separated by space character
 
 	--read_txt_format "CLASSES_SPACED_WITH_SPACE" 
-	--add_space_before_after 1 
 	--filter_txt "CLEAR_TEXT" 
 	--compute_wer 0 
 	--use_wer_formula_for_cer 1 
 	--space_value "TEXT" 
+	
+
 
 ## Train
 
 src/train/train_crnn.py
 
-need parameters
-configuration file cf. example
+Need 2 parameters:
+* configuration file cf. example
+* log directory
 
-log directory
+example:
+```
+python src/train/train_crnn.py configuration/config_cpu_demo_iam.json logs
+```
 
 
 ## Evaluate
