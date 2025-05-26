@@ -1,16 +1,20 @@
-# htr-ijcnn-2025
-
-Official code for the paper "Applying Center Loss to Neural Networks for Sequence Prediction: A Study for Handwriting Recognition" presented in IJCNN 2025.
+# Official code for the paper "Applying Center Loss to Neural Networks for Sequence Prediction: A Study for Handwriting Recognition" - IJCNN 2025.
 
 Authors: Simon Corbillé, Elisa H. Barney Smith
 
 Machine learning team from Luleå University of Technology
+
+<img src="img_readme.PNG" alt="Center loss" width="500" height="330">
+
+>Abstract: We propose a method to improve the overall accuracy of a neural network for predicting a sequence without using more training data nor adding more parameters.
+We apply a center loss at the sequence level as an auxiliary task. At every epoch we compute the center for each class, then we apply a center loss on each element of the sequence in order to reduce the intra-class distance. Center loss makes features more discriminative as well as compact in the feature space which increases the accuracy of the network and reduces overfitting. The network is trained jointly with the sequence prediction task and the center loss auxiliary task which increases the computation time only during training not in inference. We evaluate our method in a handwriting text recognition context on seven datasets. In addition to outperforming methods that do not use additional data for all datasets, our method achieves competitive results compared to those that do, with faster inference speed and fewer parameters. We also show that our method applied on a light neural network improves accuracy and is able to achieve competitive performance compared to deeper models. The advantage of using a light model is the processing speed needed for real applications.
 
 ## Installation
 Code test with:
 * Python 3.11
 * albumentations 1.4.15
 * albucore 0.016
+* numpy==2.2.1
 
 ```
 pip install -r requirements.txt
@@ -33,9 +37,7 @@ For GPU: install Pytorch for GPU
 
 ### Images size
 
-For parameters: height_max and width_max
-
-|              | Image height | Image width |
+|              | Image height max | Image width max|
 | -------------| -------------| ------------- |
 | IAM          | 128          | 1700  |
 | Cipher T1    | 120 		  | 1900  |
@@ -103,9 +105,9 @@ CER: 3.85% WER: 14.57%
 ## Reference
 CRNN from "Best Practices for a Handwritten Text Recognition System"
 
-git: https://github.com/georgeretsi/HTR-best-practices/
+Git: https://github.com/georgeretsi/HTR-best-practices/
 
-article: https://arxiv.org/abs/2404.11339
+Article: https://arxiv.org/abs/2404.11339
 
 ## Citation
 If you find this work useful, please consider citing:
